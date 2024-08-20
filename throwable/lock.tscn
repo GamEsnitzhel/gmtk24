@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2vt6j4m77k7v"]
+
+[ext_resource type="Script" path="res://throwable/lock.gd" id="1_4cq00"]
+[ext_resource type="Texture2D" uid="uid://b5nup0h2clky2" path="res://art/lock.png" id="1_qo0f7"]
+[ext_resource type="AudioStream" uid="uid://b6nvslqhmao42" path="res://aud/explosion(1).wav" id="3_kpfhw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a5tbb"]
+radius = 102.044
+
+[node name="Lock" type="StaticBody2D"]
+script = ExtResource("1_4cq00")
+
+[node name="Lock" type="Sprite2D" parent="."]
+texture = ExtResource("1_qo0f7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a5tbb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kpfhw")
+volume_db = -7.955

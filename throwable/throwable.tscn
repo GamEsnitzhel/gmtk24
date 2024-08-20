@@ -1,0 +1,100 @@
+[gd_scene load_steps=18 format=3 uid="uid://52hi8danynii"]
+
+[ext_resource type="Script" path="res://throwable/throwable.gd" id="1_0fwom"]
+[ext_resource type="Texture2D" uid="uid://em346qvylgso" path="res://icon.svg" id="1_tr0iv"]
+[ext_resource type="Texture2D" uid="uid://bia8anj1fgvyw" path="res://art/bal/Bal-1.png" id="3_pu3yx"]
+[ext_resource type="Texture2D" uid="uid://c8m1oq67pnw4v" path="res://art/bal/Bal-2.png" id="4_6251p"]
+[ext_resource type="Texture2D" uid="uid://cj0dojng3sgtw" path="res://art/bal/Bal-3.png" id="5_2ig36"]
+[ext_resource type="Texture2D" uid="uid://cgjghmk2ujbr0" path="res://art/bal/Bal-4.png" id="6_g4jyx"]
+[ext_resource type="Texture2D" uid="uid://c44ctu8qmxccm" path="res://art/bal/Bal-5.png" id="7_b03n2"]
+[ext_resource type="Texture2D" uid="uid://b1jgfykx5gosd" path="res://art/bal/Bal-6.png" id="8_vyp47"]
+[ext_resource type="Texture2D" uid="uid://dwewgpy1filsu" path="res://art/bal/Bal-7.png" id="9_y44ve"]
+[ext_resource type="Texture2D" uid="uid://pqh5rvbt6q60" path="res://art/bal/Bal-8.png" id="10_bgayp"]
+[ext_resource type="AudioStream" uid="uid://dko2nc8sqy7n2" path="res://aud/hitHurt.wav" id="11_5myg1"]
+
+[sub_resource type="Curve" id="Curve_dlnxi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1u816"]
+curve = SubResource("Curve_dlnxi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nhvbu"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+inherit_velocity_ratio = -0.2
+spread = 180.0
+initial_velocity_max = 230.77
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 20.0
+scale_curve = SubResource("CurveTexture_1u816")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0tv1h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pu3yx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6251p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2ig36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g4jyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_b03n2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vyp47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y44ve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_bgayp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4lk22"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f82h5"]
+radius = 35.0143
+
+[node name="Throwable" type="RigidBody2D"]
+script = ExtResource("1_0fwom")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_nhvbu")
+lifetime = 0.5
+
+[node name="Icon" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_tr0iv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -6)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_0tv1h")
+frame_progress = 0.0348798
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4lk22")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f82h5")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_5myg1")

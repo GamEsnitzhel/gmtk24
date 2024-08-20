@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c38go88phn17y"]
+
+[ext_resource type="Script" path="res://throwable/telep.gd" id="1_8lnyi"]
+[ext_resource type="Texture2D" uid="uid://cgw6l2rejkv4d" path="res://art/telep.png" id="1_erv8d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8a6n6"]
+radius = 48.0104
+
+[node name="Telep" type="Area2D"]
+script = ExtResource("1_8lnyi")
+
+[node name="Telep" type="Sprite2D" parent="."]
+position = Vector2(0, -45)
+texture = ExtResource("1_erv8d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -31)
+shape = SubResource("CircleShape2D_8a6n6")
